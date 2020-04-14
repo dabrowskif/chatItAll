@@ -16,6 +16,6 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#openMainAppAndCloseLogin" text="Zaloguj" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Button fx:id="loginButton" mnemonicParsing="false" onAction="#openMainWindowAndCloseLoginWindow" text="Zaloguj" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

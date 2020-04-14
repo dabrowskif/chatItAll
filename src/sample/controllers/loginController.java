@@ -9,9 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class loginController {
-
     private final Stage loginStage;
-    Button loginButton = new Button();
 
     public loginController() throws IOException {
         loginStage = new Stage();
@@ -26,13 +24,13 @@ public class loginController {
     private void initialize() {
     }
 
-    public void showStage(){
+    public void showStage() {
         loginStage.show();
     }
 
-    public void openMainAppAndCloseLogin() throws IOException {
+    public void openMainWindowAndCloseLoginWindow() throws IOException {
         loginStage.close();
-        mainAppController mainAppController = new mainAppController();
+        mainController mainAppController = new mainController();
         mainAppController.showStage();
     }
 

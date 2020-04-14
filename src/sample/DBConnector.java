@@ -1,9 +1,9 @@
 package sample;
 
 public class DBConnector {
-    int userId;
+    public static final DBConnector INSTANCE = new DBConnector();
 
-    private void connectToDatabase() {
+    private DBConnector() {
     }
 
 

@@ -7,13 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class mainAppController {
+public class mainController {
     private final Stage mainAppStage;
-    public int userId;
 
-    public mainAppController() throws IOException {
+    public mainController() throws IOException {
         mainAppStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/mainApp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/main.fxml"));
         loader.setController(this);
         mainAppStage.setScene(new Scene(loader.load()));
         mainAppStage.setTitle("chatItAll");
@@ -21,14 +20,14 @@ public class mainAppController {
     }
 
     @FXML
-    private void Initialize() {
+    private void initialize() {
     }
 
-    public void showStage(){
+    public void showStage() {
         mainAppStage.show();
     }
 
-    public void closeMainAppAndOpenLogin() throws IOException {
+    public void closeMainWindowAndOpenLoginWindow() throws IOException {
         mainAppStage.close();
         loginController loginController = new loginController();
         loginController.showStage();
