@@ -1,4 +1,4 @@
-package sample.controllers;
+package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,12 +16,12 @@ public class loginController {
 
     public loginController() throws IOException {
         loginStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
         loader.setController(this);
         loginStage.setScene(new Scene(loader.load()));
         loginStage.setTitle("Login to chatIT");
         loginStage.setResizable(false);
-        loginStage.getIcons().add(new Image("/sample/img/icon.png"));
+        loginStage.getIcons().add(new Image("/img/icon.png"));
     }
 
     @FXML

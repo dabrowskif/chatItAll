@@ -1,10 +1,9 @@
-package sample.controllers;
+package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -29,12 +28,12 @@ public class mainController {
 
     public mainController() throws IOException {
         mainStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/main.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"));
         loader.setController(this);
         mainStage.setScene(new Scene(loader.load()));
         mainStage.setTitle("chatIT");
         mainStage.setResizable(false);
-        mainStage.getIcons().add(new Image("/sample/img/icon.png"));
+        mainStage.getIcons().add(new Image("/img/icon.png"));
     }
 
     @FXML
@@ -97,16 +96,16 @@ public class mainController {
         ImageView statusImage = new ImageView();
         switch(status) {
             case "on":
-                statusImage.setImage(new Image("/sample/img/online.png"));
+                statusImage.setImage(new Image("/img/online.png"));
                 break;
             case "off":
-                statusImage.setImage(new Image("/sample/img/offline.png"));
+                statusImage.setImage(new Image("/img/offline.png"));
                 break;
             case "invisible":
-                statusImage.setImage(new Image("/sample/img/invisible.png"));
+                statusImage.setImage(new Image("/img/invisible.png"));
                 break;
             case "brb":
-                statusImage.setImage(new Image("/sample/img/brb.png"));
+                statusImage.setImage(new Image("/img/brb.png"));
                 break;
             default:
                 break;
