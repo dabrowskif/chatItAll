@@ -15,7 +15,7 @@ public class mainController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/main.fxml"));
         loader.setController(this);
         mainAppStage.setScene(new Scene(loader.load()));
-        mainAppStage.setTitle("chatItAll");
+        mainAppStage.setTitle("chatIT");
         mainAppStage.setResizable(false);
     }
 
