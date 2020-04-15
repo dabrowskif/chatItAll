@@ -22,7 +22,7 @@ public class mainController {
     ObservableList<String> friendsObservableList = FXCollections.observableArrayList(
             "chocolate", "salmon", "gold", "coral", "darkorchid",
             "darkgoldenrod", "lightsalmon", "black", "rosybrown", "blue",
-            "blueviolet", "brown");
+            "blueviolet", "brown", "red", "magenta", "pink", "white", "black", "orange", "green", "purple");
 
     private final Stage mainAppStage;
 
@@ -37,7 +37,7 @@ public class mainController {
 
     @FXML
     private void initialize() {
-        setAndShowListView();
+        setAndShowListView();   
     }
 
     private void setAndShowListView() {
