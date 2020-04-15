@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
-=======
->>>>>>> mainWindow
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
