@@ -16,7 +16,7 @@ public class loginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/sample/fxml/login.fxml"));
         loader.setController(this);
         loginStage.setScene(new Scene(loader.load()));
-        loginStage.setTitle("Login to chatItAll");
+        loginStage.setTitle("Login to chatIT");
         loginStage.setResizable(false);
     }
 
