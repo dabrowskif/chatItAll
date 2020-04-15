@@ -4,11 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class loginController {
+    @FXML
+    Button loginButton = new Button();
     private final Stage loginStage;
 
     public loginController() throws IOException {
@@ -18,10 +21,18 @@ public class loginController {
         loginStage.setScene(new Scene(loader.load()));
         loginStage.setTitle("Login to chatIT");
         loginStage.setResizable(false);
+        loginStage.getIcons().add(new Image("/sample/img/icon.png"));
     }
 
     @FXML
     private void initialize() {
+        loginButton.setOnAction(event -> {
+            try {
+                openMainWindowAndCloseLoginWindow();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public void showStage() {
