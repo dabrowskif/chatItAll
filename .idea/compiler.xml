@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="chatItAllApp" target="10" />
+      <module name="chatItAllApp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
