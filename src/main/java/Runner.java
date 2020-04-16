@@ -1,10 +1,11 @@
+import myclasses.Car;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Runner {
 
@@ -61,10 +62,11 @@ public class Runner {
         session.getTransaction().commit();
     }
 
+    //@SuppressWarnings("unchecked")
     private void read(Session session) {
-        Query q = session.createQuery("select _car from Car _car");
+        Query q = session.createQuery("select _car from myclasses.Car _car");
 
-        List<Car> cars = q.list();
+        ArrayList<Car> cars = new ArrayList<Car>(q.list());
 
         System.out.println("Reading car records...");
         System.out.printf("%-30.30s  %-30.30s%n", "Model", "Price");
