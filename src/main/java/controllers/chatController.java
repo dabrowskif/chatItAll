@@ -24,6 +24,7 @@ public class chatController {
         chatStage.setTitle("chatIT");
         chatStage.setResizable(false);
         chatStage.getIcons().add(new Image("/img/icon.png"));
+        chatStage.setTitle("chatIT - " + friend.getImie() + " " + friend.getNazwisko());
         chatStage.setOnHiding( event -> {
             mainController.closeChatWindowForFriend(friend);
         } );

@@ -2,12 +2,14 @@ package myclasses;
 
 public class Friend {
     // test class before implementing database
+    public enum UserStatusEnum {ON, BRB, INVIS, OFF}
+
     private int id;
     private String imie;
     private String nazwisko;
-    private String status;
+    private UserStatusEnum status;
 
-    public Friend(int id, String imie, String nazwisko, String status) {
+    public Friend(int id, String imie, String nazwisko, UserStatusEnum status) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -26,7 +28,7 @@ public class Friend {
         return nazwisko;
     }
 
-    public String getStatus() {
+    public UserStatusEnum getStatus() {
         return status;
     }
 

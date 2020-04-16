@@ -1,7 +1,5 @@
 package controllers;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,8 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+
 import myclasses.Friend;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -34,6 +34,7 @@ public class mainController {
 
     private final Stage mainStage;
     private Map<Integer, chatController> windowChatMap= new TreeMap<>();
+
 
     public mainController() throws IOException {
         mainStage = new Stage();
@@ -72,23 +73,38 @@ public class mainController {
 
         //TODO make it double click
         friendsListView.setOnMouseClicked(event -> {
-            checkWhichUserGotClickedAndOpenHisChat();
+            try {
+                openChatWindowWithAnotherUser(friendsListView.getSelectionModel().getSelectedItem());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
     }
 
     //adding static friends for testing purposes
     private void addFriendsToObservableList() {
-        friendsObservableList.add(new Friend(1, "Filip", "Dąbrowski", "on"));
-        friendsObservableList.add(new Friend(2, "Simba", "Minimakaberka", "on"));
-        friendsObservableList.add(new Friend(3, "Grupa", "Trubadurów", "on"));
-        friendsObservableList.add(new Friend(4, "Maciej", "Lekowski", "off"));
-        friendsObservableList.add(new Friend(5, "Weronika", "Kozłowska <3", "on"));
-        friendsObservableList.add(new Friend(6, "Błażej", "Kowalski", "invisible"));
-        friendsObservableList.add(new Friend(7, "Justyn", "Lekkomyślny", "off"));
-        friendsObservableList.add(new Friend(8, "Zdzisław", "Stary", "on"));
-        friendsObservableList.add(new Friend(9, "Ryszard", "Ryszewski", "invisible"));
-        friendsObservableList.add(new Friend(10, "Mirosław", "Tegoroczny", "off"));
+        friendsObservableList.add(new Friend(7, "Justyn", "Lekkomyślny", Friend.UserStatusEnum.INVIS));
+        friendsObservableList.add(new Friend(8, "Zdzisław", "Stary", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(9, "Ryszard", "Ryszewski", Friend.UserStatusEnum.OFF));
+        friendsObservableList.add(new Friend(10, "Mirosław", "Tegoroczny", Friend.UserStatusEnum.OFF));
+        friendsObservableList.add(new Friend(1, "Filip", "Dąbrowski", Friend.UserStatusEnum.INVIS));
+        friendsObservableList.add(new Friend(2, "Simba", "Minimakaberka", Friend.UserStatusEnum.OFF));
+        friendsObservableList.add(new Friend(3, "Grupa", "Trubadurów", Friend.UserStatusEnum.BRB));
+        friendsObservableList.add(new Friend(4, "Maciej", "Lekowski", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(5, "Weronika", "Kozłowska <3", Friend.UserStatusEnum.OFF));
+        friendsObservableList.add(new Friend(6, "Błażej", "Kowalski", Friend.UserStatusEnum.ON));
+        sortFriendsObservableList();
+    }
+
+    private void sortFriendsObservableList() {
+        FXCollections.sort(friendsObservableList, new StatusComparator());
+    }
+
+    static class StatusComparator implements Comparator<Friend> {
+        public int compare(Friend f1, Friend f2) {
+            return f1.getStatus().compareTo(f2.getStatus());
+        }
     }
 
     private void setAndShowListView() {
@@ -116,17 +132,17 @@ public class mainController {
         }
     }
 
-    private static ImageView createStatusImage(String status) {
+    private static ImageView createStatusImage(Friend.UserStatusEnum status) {
         ImageView statusImage = new ImageView();
         switch(status) {
-            case "on":
+            case ON:
                 statusImage.setImage(new Image("/img/online.png"));
                 break;
-            case "off":
-            case "invisible":
+            case OFF:
+            case INVIS:
                 statusImage.setImage(new Image("/img/offline.png"));
                 break;
-            case "brb":
+            case BRB:
                 statusImage.setImage(new Image("/img/brb.png"));
                 break;
             default:
@@ -147,19 +163,15 @@ public class mainController {
         mainStage.close();
     }
 
-    private void checkWhichUserGotClickedAndOpenHisChat() {
-        try {
-            openChatWindowWithAnotherUser(friendsListView.getSelectionModel().getSelectedItem());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void openChatWindowWithAnotherUser(Friend friend) throws IOException {
         if(!checkIfChatWindowIsAlreadyOpenWithFriend(friend)) {
             chatController chatController = new chatController(this, friend);
             chatController.showStage();
             windowChatMap.put(friend.getId(), chatController);
+        }
+        else {
+
         }
     }
 
