@@ -11,8 +11,9 @@ import java.io.IOException;
 public class chatController {
 
     private Friend friend;
-    private final Stage chatStage;
     private final mainController mainController;
+
+    private final Stage chatStage;
 
     public chatController(mainController mainController, Friend friend) throws IOException {
         this.friend = friend;
@@ -26,12 +27,16 @@ public class chatController {
         chatStage.getIcons().add(new Image("/img/icon.png"));
         chatStage.setTitle("chatIT - " + friend.getImie() + " " + friend.getNazwisko());
         chatStage.setOnHiding( event -> {
-            mainController.closeChatWindowForFriend(friend);
+            mainController.closeChatWindowForFriend(friend.getId());
         } );
     }
 
     public void showStage() {
         chatStage.show();
+    }
+
+    public void closeStage() {
+        chatStage.close();
     }
 
 

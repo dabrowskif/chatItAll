@@ -16,9 +16,8 @@ import javafx.util.Callback;
 
 import myclasses.Friend;
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class mainController {
     @FXML
@@ -33,8 +32,8 @@ public class mainController {
     private MenuItem exitApplicationMenuItem = new MenuItem();
 
     private final Stage mainStage;
-    private Map<Integer, chatController> windowChatMap= new TreeMap<>();
-
+    private Map<Integer, chatController> chatWindowsMap= new TreeMap<>();
+    private List<Integer> chatWindowsToCloseList = new ArrayList<>();
 
     public mainController() throws IOException {
         mainStage = new Stage();
@@ -44,6 +43,28 @@ public class mainController {
         mainStage.setTitle("chatIT");
         mainStage.setResizable(false);
         mainStage.getIcons().add(new Image("/img/icon.png"));
+        mainStage.setOnHiding( event -> {
+            closeAllChatWindows();
+        } );
+    }
+
+    private void closeAllChatWindows() {
+        getOpenedChatWindows();
+        closeOpenedChatWindows();
+    }
+
+    private void getOpenedChatWindows() {
+        for(Entry<Integer, chatController> entry : chatWindowsMap.entrySet()) {
+            chatWindowsToCloseList.add(entry.getKey());
+        }
+    }
+
+    private void closeOpenedChatWindows() {
+        for(Integer i : chatWindowsToCloseList) {
+            chatWindowsMap.get(i).closeStage();
+            chatWindowsMap.remove(i);
+        }
+        chatWindowsToCloseList.clear();
     }
 
     public void showStage() {
@@ -57,7 +78,8 @@ public class mainController {
 
         logoutMenuItem.setOnAction(event -> {
             try {
-                closeMainWindowAndOpenLoginWindow();
+                closeMainWindow();
+                openLoginWindow();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,7 +87,7 @@ public class mainController {
 
         exitApplicationMenuItem.setOnAction(event -> {
             try {
-                closeApplication();
+                closeMainWindow();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -84,16 +106,16 @@ public class mainController {
 
     //adding static friends for testing purposes
     private void addFriendsToObservableList() {
+        friendsObservableList.add(new Friend(1, "Filip", "Dąbrowski", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(2, "Simba", "Minimakaberka", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(3, "Grupa", "Trubadurów", Friend.UserStatusEnum.BRB));
+        friendsObservableList.add(new Friend(4, "Maciej", "Lekowski", Friend.UserStatusEnum.OFF));
+        friendsObservableList.add(new Friend(5, "Weronika", "Kozłowska <3", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(6, "Błażej", "Kowalski", Friend.UserStatusEnum.OFF));
         friendsObservableList.add(new Friend(7, "Justyn", "Lekkomyślny", Friend.UserStatusEnum.INVIS));
-        friendsObservableList.add(new Friend(8, "Zdzisław", "Stary", Friend.UserStatusEnum.ON));
+        friendsObservableList.add(new Friend(8, "Zdzisław", "Stary", Friend.UserStatusEnum.OFF));
         friendsObservableList.add(new Friend(9, "Ryszard", "Ryszewski", Friend.UserStatusEnum.OFF));
         friendsObservableList.add(new Friend(10, "Mirosław", "Tegoroczny", Friend.UserStatusEnum.OFF));
-        friendsObservableList.add(new Friend(1, "Filip", "Dąbrowski", Friend.UserStatusEnum.INVIS));
-        friendsObservableList.add(new Friend(2, "Simba", "Minimakaberka", Friend.UserStatusEnum.OFF));
-        friendsObservableList.add(new Friend(3, "Grupa", "Trubadurów", Friend.UserStatusEnum.BRB));
-        friendsObservableList.add(new Friend(4, "Maciej", "Lekowski", Friend.UserStatusEnum.ON));
-        friendsObservableList.add(new Friend(5, "Weronika", "Kozłowska <3", Friend.UserStatusEnum.OFF));
-        friendsObservableList.add(new Friend(6, "Błażej", "Kowalski", Friend.UserStatusEnum.ON));
         sortFriendsObservableList();
     }
 
@@ -153,14 +175,13 @@ public class mainController {
         return statusImage;
     }
 
-    private void closeMainWindowAndOpenLoginWindow() throws IOException {
+    private void closeMainWindow() throws IOException {
         mainStage.close();
-        loginController loginController = new loginController();
-        loginController.showStage();
     }
 
-    private void closeApplication() throws IOException {
-        mainStage.close();
+    private void openLoginWindow() throws IOException {
+        loginController loginController = new loginController();
+        loginController.showStage();
     }
 
 
@@ -168,22 +189,19 @@ public class mainController {
         if(!checkIfChatWindowIsAlreadyOpenWithFriend(friend)) {
             chatController chatController = new chatController(this, friend);
             chatController.showStage();
-            windowChatMap.put(friend.getId(), chatController);
-        }
-        else {
-
+            chatWindowsMap.put(friend.getId(), chatController);
         }
     }
 
     private boolean checkIfChatWindowIsAlreadyOpenWithFriend(Friend friend) {
-        if(windowChatMap.containsKey(friend.getId())) {
+        if(chatWindowsMap.containsKey(friend.getId())) {
                 return true;
         }
         return false;
     }
 
-    public void closeChatWindowForFriend(Friend friend) {
-        windowChatMap.remove(friend.getId());
+    public void closeChatWindowForFriend(int userID) {
+        chatWindowsMap.remove(userID);
     }
 
 }
