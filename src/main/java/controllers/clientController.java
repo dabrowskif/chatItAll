@@ -192,7 +192,7 @@ public class clientController {
     }
 
     private void openLoginWindow() throws IOException {
-        loginController loginController = new loginController();
+        loginController loginController = new loginController(port);
         loginController.showStage();
     }
 

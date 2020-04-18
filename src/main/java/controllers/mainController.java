@@ -16,7 +16,7 @@ public class mainController {
     private Button serverButton;
 
     private final Stage mainStage;
-    private int port;
+    private int port = 50000;
 
     public mainController() throws IOException {
         mainStage = new Stage();
@@ -37,7 +37,7 @@ public class mainController {
     @FXML
     private void initialize() {
         clientButton.setOnAction(event -> {
-            openClientWindow();
+            openLoginWindow();
         });
 
         serverButton.setOnAction(event -> {
@@ -45,11 +45,10 @@ public class mainController {
         });
     }
 
-    private void openClientWindow() {
-        clientController clientController = null;
+    private void openLoginWindow() {
         try {
-            clientController = new clientController();
-            clientController.showStage();
+            loginController loginController = new loginController(port);
+            loginController.showStage();
         } catch (IOException e) {
             e.printStackTrace();
         }

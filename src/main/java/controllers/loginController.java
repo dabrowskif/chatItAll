@@ -12,9 +12,13 @@ import java.io.IOException;
 public class loginController {
     @FXML
     Button loginButton = new Button();
-    private final Stage loginStage;
 
-    public loginController() throws IOException {
+    private final Stage loginStage;
+    private final int port;
+
+    public loginController(int port) throws IOException {
+        this.port = port;
+
         loginStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
         loader.setController(this);
@@ -41,7 +45,7 @@ public class loginController {
 
     public void openMainWindowAndCloseLoginWindow() throws IOException {
         loginStage.close();
-        clientController mainAppController = new clientController();
+        clientController mainAppController = new clientController(port);
         mainAppController.showStage();
     }
 
