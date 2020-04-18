@@ -4,14 +4,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.xml.soap.Text;
 import java.io.IOException;
 
 public class serverPropertiesController {
     @FXML
     Button startServerButton;
+    @FXML
+    RadioButton defaultRadioButton;
+    @FXML
+    RadioButton customRadioButton;
+    @FXML
+    TextField portTextField;
 
     private final Stage serverPropertiesStage;
     private final mainController mainController;
@@ -32,15 +41,30 @@ public class serverPropertiesController {
 
     private void initializeComponents() {
         startServerButton = new Button();
+        defaultRadioButton = new RadioButton();
+        customRadioButton = new RadioButton();
+        portTextField = new TextField();
+        port = 50000;
     }
 
     @FXML
     private void initialize() {
         startServerButton.setOnAction(event -> {
+            setPortValue();
             sendPortValueToMainWindow();
             openServerWindow();
             closeStage();
         });
+
+        defaultRadioButton.setOnAction(event ->
+                portTextField.setDisable(true));
+
+        customRadioButton.setOnAction(event ->
+                portTextField.setDisable(false));
+    }
+
+    private void setPortValue() {
+        port = Integer.parseInt(portTextField.getText());
     }
 
     private void sendPortValueToMainWindow() {
@@ -49,20 +73,21 @@ public class serverPropertiesController {
 
     private void openServerWindow() {
         try {
-            serverController serverController = new serverController();
+            serverController serverController = new serverController(port);
             serverController.showStage();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    private void closeStage() {
+        serverPropertiesStage.close();
+    }
+
     public void showStage() {
         serverPropertiesStage.show();
     }
 
-    private void closeStage() {
-        serverPropertiesStage.close();
-    }
 
 
 }
