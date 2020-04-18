@@ -16,7 +16,7 @@ public class loginController {
 
     public loginController() throws IOException {
         loginStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
         loader.setController(this);
         loginStage.setScene(new Scene(loader.load()));
         loginStage.setTitle("Login to chatIT");
@@ -41,7 +41,7 @@ public class loginController {
 
     public void openMainWindowAndCloseLoginWindow() throws IOException {
         loginStage.close();
-        mainController mainAppController = new mainController();
+        clientController mainAppController = new clientController();
         mainAppController.showStage();
     }
 

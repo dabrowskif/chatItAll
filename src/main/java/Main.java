@@ -1,6 +1,6 @@
+import controllers.mainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import controllers.loginController;
 
 import java.io.IOException;
 
@@ -12,14 +12,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        openLoginWindow();
+        openMainWindow();
     }
 
-    private void openLoginWindow() throws IOException {
-        loginController loginController = new loginController();
-        loginController.showStage();
+    private void openMainWindow() throws IOException {
+        mainController mainController = new mainController();
+        mainController.showStage();
     }
-
 
 
 }
