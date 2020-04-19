@@ -41,7 +41,7 @@
             <items>
                     <MenuItem mnemonicParsing="false" text="O programie" />
                     <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Wyloguj" />
-                    <MenuItem fx:id="exitApplicationMenuItem" mnemonicParsing="false" text="Wyjdź" />
+                    <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Wyjdź" />
             </items>
           </Menu>
         </menus>
