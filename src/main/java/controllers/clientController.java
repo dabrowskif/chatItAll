@@ -5,13 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import myclasses.Friend;
 
 import java.io.IOException;
@@ -29,15 +29,18 @@ public class clientController {
     private MenuItem logoutMenuItem;
     @FXML
     private MenuItem exitApplicationMenuItem;
+    @FXML
+    private Label portLabel;
 
     private final Stage userWindowStage;
-    private Map<Integer, chatController> chatWindowsMap;
-    private List<Integer> chatWindowsToCloseList;
     private final int port;
 
+    private Map<Integer, chatController> chatWindowsMap;
+    private List<Integer> chatWindowsToCloseList;
+
     public clientController(int port) throws IOException {
-        initializeComponents();
         this.port = port;
+        initializeComponents();
 
         userWindowStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/client.fxml"));
@@ -46,9 +49,7 @@ public class clientController {
         userWindowStage.setTitle("chatIT");
         userWindowStage.setResizable(false);
         userWindowStage.getIcons().add(new Image("/img/icon.png"));
-        userWindowStage.setOnHiding( event -> {
-            closeAllChatWindows();
-        } );
+        userWindowStage.setOnHiding( event -> closeAllChatWindows());
     }
     private void initializeComponents() {
         friendsListView = new ListView<>();
@@ -58,6 +59,7 @@ public class clientController {
         chatWindowsMap = new TreeMap<>();
         chatWindowsToCloseList = new ArrayList<>();
         friendsObservableList = FXCollections.observableArrayList();
+        portLabel = new Label();
     }
 
     private void closeAllChatWindows() {
@@ -84,35 +86,23 @@ public class clientController {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize()
+    {
+        portLabel.setText(String.valueOf(port));
         addFriendsToObservableList();
         setAndShowListView();
 
         logoutMenuItem.setOnAction(event -> {
-            try {
                 closeMainWindow();
                 openLoginWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         });
 
-        exitApplicationMenuItem.setOnAction(event -> {
-            try {
-                closeMainWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        exitApplicationMenuItem.setOnAction(event ->
+                closeMainWindow());
 
         //TODO make it double click
-        friendsListView.setOnMouseClicked(event -> {
-            try {
-                openChatWindowWithAnotherUser(friendsListView.getSelectionModel().getSelectedItem());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        friendsListView.setOnMouseClicked(event ->
+                openChatWindowWithAnotherUser(friendsListView.getSelectionModel().getSelectedItem()) );
 
     }
 
@@ -143,12 +133,7 @@ public class clientController {
 
     private void setAndShowListView() {
         friendsListView.setItems(friendsObservableList);
-        friendsListView.setCellFactory(new Callback<ListView<Friend>, ListCell<Friend>>() {
-            @Override
-            public ListCell<Friend> call(ListView<Friend> list) {
-                return new friendCell();
-            }
-        });
+        friendsListView.setCellFactory(list -> new friendCell());
 
     }
 
@@ -187,29 +172,34 @@ public class clientController {
         return statusImage;
     }
 
-    private void closeMainWindow() throws IOException {
+    private void closeMainWindow(){
         userWindowStage.close();
     }
 
-    private void openLoginWindow() throws IOException {
-        loginController loginController = new loginController(port);
-        loginController.showStage();
+    private void openLoginWindow() {
+        try {
+            loginController loginController = new loginController(port);
+            loginController.showStage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    private void openChatWindowWithAnotherUser(Friend friend) throws IOException {
+    private void openChatWindowWithAnotherUser(Friend friend) {
         if(!checkIfChatWindowIsAlreadyOpenWithFriend(friend)) {
-            chatController chatController = new chatController(this, friend);
-            chatController.showStage();
-            chatWindowsMap.put(friend.getId(), chatController);
+            try {
+                chatController chatController = new chatController(this, friend);
+                chatController.showStage();
+                chatWindowsMap.put(friend.getId(), chatController);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private boolean checkIfChatWindowIsAlreadyOpenWithFriend(Friend friend) {
-        if(chatWindowsMap.containsKey(friend.getId())) {
-                return true;
-        }
-        return false;
+        return chatWindowsMap.containsKey(friend.getId());
     }
 
     public void closeChatWindowForFriend(int userID) {

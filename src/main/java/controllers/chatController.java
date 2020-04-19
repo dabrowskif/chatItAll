@@ -18,6 +18,7 @@ public class chatController {
     public chatController(clientController clientController, Friend friend) throws IOException {
         this.friend = friend;
         this.clientController = clientController;
+
         chatStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/chat.fxml"));
         loader.setController(this);

@@ -30,23 +30,21 @@ public class loginController {
 
     @FXML
     private void initialize() {
-        loginButton.setOnAction(event -> {
-            try {
-                openMainWindowAndCloseLoginWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        loginButton.setOnAction(event -> openMainWindowAndCloseLoginWindow());
     }
 
     public void showStage() {
         loginStage.show();
     }
 
-    public void openMainWindowAndCloseLoginWindow() throws IOException {
-        loginStage.close();
-        clientController mainAppController = new clientController(port);
-        mainAppController.showStage();
+    public void openMainWindowAndCloseLoginWindow(){
+        try {
+            loginStage.close();
+            clientController mainAppController = new clientController(port);
+            mainAppController.showStage();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

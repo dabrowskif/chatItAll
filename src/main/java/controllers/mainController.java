@@ -16,10 +16,12 @@ public class mainController {
     private Button serverButton;
 
     private final Stage mainStage;
-    private int port = 50000;
+    private int port;
 
     public mainController() throws IOException {
+        initializeComponents();
         mainStage = new Stage();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/main.fxml"));
         loader.setController(this);
         mainStage.setScene(new Scene(loader.load()));
@@ -31,18 +33,12 @@ public class mainController {
     private void initializeComponents() {
         clientButton = new Button();
         serverButton = new Button();
-        port = 50000;
     }
 
     @FXML
     private void initialize() {
-        clientButton.setOnAction(event -> {
-            openLoginWindow();
-        });
-
-        serverButton.setOnAction(event -> {
-            openServerPropertiesWindow();
-        });
+        clientButton.setOnAction(event -> openLoginWindow());
+        serverButton.setOnAction(event -> openServerPropertiesWindow());
     }
 
     private void openLoginWindow() {
@@ -55,9 +51,8 @@ public class mainController {
     }
 
     private void openServerPropertiesWindow() {
-        serverPropertiesController serverPropertiesController = null;
         try {
-            serverPropertiesController = new serverPropertiesController(this);
+            serverPropertiesController serverPropertiesController = new serverPropertiesController(this);
             serverPropertiesController.showStage();
         } catch (IOException e) {
             e.printStackTrace();

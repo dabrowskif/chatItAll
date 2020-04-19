@@ -12,8 +12,10 @@ public class serverController {
     private final Stage serverStage;
     private int port;
 
-    public serverController() throws IOException {
+    public serverController(int port) throws IOException {
         serverStage = new Stage();
+        this.port = port;
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/server.fxml"));
         loader.setController(this);
         serverStage.setScene(new Scene(loader.load()));
@@ -23,18 +25,10 @@ public class serverController {
     }
 
     private void initializeComponents() {
-
     }
 
     @FXML
     private void initialize() {
-        /*clientButton.setOnAction(event -> {
-            try {
-                openClientWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });*/
     }
 
     public void showStage() {

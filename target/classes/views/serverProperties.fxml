@@ -22,13 +22,13 @@
   </rowConstraints>
    <children>
       <Button fx:id="startServerButton" mnemonicParsing="false" text="Uruchom" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <TextField alignment="CENTER" disable="true" maxHeight="20.0" maxWidth="100.0" minHeight="20.0" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="50000" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <TextField fx:id="portTextField" alignment="CENTER" disable="true" maxHeight="20.0" maxWidth="100.0" minHeight="20.0" minWidth="100.0" prefHeight="20.0" prefWidth="100.0" text="50000" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <ImageView fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <image>
             <Image url="@../img/logo-serwer.png" />
          </image>
       </ImageView>
-      <RadioButton mnemonicParsing="false" selected="true" text="Domyślny" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <RadioButton fx:id="defaultRadioButton" mnemonicParsing="false" selected="true" text="Domyślny" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin>
@@ -36,7 +36,7 @@
             <ToggleGroup fx:id="portToggleGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton mnemonicParsing="false" text="Własny" toggleGroup="$portToggleGroup" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <RadioButton fx:id="customRadioButton" mnemonicParsing="false" text="Własny" toggleGroup="$portToggleGroup" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
