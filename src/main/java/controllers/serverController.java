@@ -14,23 +14,6 @@ import java.io.IOException;
 
 public class serverController  extends windowLoader {
     private final Stage serverStage;
-<<<<<<< HEAD
-    private int port;
-
-    public serverController(int port) throws IOException {
-        serverStage = new Stage();
-        this.port = port;
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/server.fxml"));
-        loader.setController(this);
-        serverStage.setScene(new Scene(loader.load()));
-        serverStage.setTitle("chatIT - Server");
-        serverStage.setResizable(false);
-        serverStage.getIcons().add(new Image("/img/icon.png"));
-    }
-
-    private void initializeComponents() {
-=======
     private Server server;
 
     private MutableBoolean isServerRunning;
@@ -48,16 +31,12 @@ public class serverController  extends windowLoader {
 
     private void initializeComponents() {
         isServerRunning.setValue(true);
->>>>>>> mvc-test
     }
 
     @FXML
     private void initialize() {
-<<<<<<< HEAD
-=======
-
-        //serverStage.setOnHiding( event ->());
->>>>>>> mvc-test
+        serverStage.setOnHiding( event ->
+                isServerRunning.setValue(false));
     }
 
     public void showStage() {

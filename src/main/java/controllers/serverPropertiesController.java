@@ -40,24 +40,12 @@ public class serverPropertiesController extends windowLoader {
     }
 
     private void initializeComponents() {
-<<<<<<< HEAD
-        startServerButton = new Button();
-        defaultRadioButton = new RadioButton();
-        customRadioButton = new RadioButton();
-        portTextField = new TextField();
-        port = 50000;
-=======
->>>>>>> mvc-test
     }
 
     @FXML
     private void initialize() {
         startServerButton.setOnAction(event -> {
             setPortValue();
-<<<<<<< HEAD
-            sendPortValueToMainWindow();
-=======
->>>>>>> mvc-test
             openServerWindow();
             closeStage();
         });
@@ -67,13 +55,6 @@ public class serverPropertiesController extends windowLoader {
 
         customRadioButton.setOnAction(event ->
                 portTextField.setDisable(false));
-<<<<<<< HEAD
-    }
-
-    private void setPortValue() {
-        port = Integer.parseInt(portTextField.getText());
-=======
->>>>>>> mvc-test
     }
 
     private void setPortValue() {
@@ -82,11 +63,7 @@ public class serverPropertiesController extends windowLoader {
 
     private void openServerWindow() {
         try {
-<<<<<<< HEAD
-            serverController serverController = new serverController(port);
-=======
             serverController serverController = new serverController(isServerRunning, port);
->>>>>>> mvc-test
             serverController.showStage();
         } catch (IOException e) {
             e.printStackTrace();

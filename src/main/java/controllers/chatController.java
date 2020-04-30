@@ -37,26 +37,10 @@ public class chatController extends windowLoader {
     public chatController(chatModel chatModel, Friend friend) throws IOException {
         initializeComponents();
         this.friend = friend;
-<<<<<<< HEAD
-        this.clientController = clientController;
-
-        chatStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/chat.fxml"));
-        loader.setController(this);
-        chatStage.setScene(new Scene(loader.load()));
-        chatStage.setTitle("chatIT");
-        chatStage.setResizable(false);
-        chatStage.getIcons().add(new Image("/img/icon.png"));
-        chatStage.setTitle("chatIT - " + friend.getImie() + " " + friend.getNazwisko());
-        chatStage.setOnHiding( event -> {
-            clientController.closeChatWindowForFriend(friend.getId());
-        } );
-=======
         this.chatModel = chatModel;
 
         createWindow(chatStage = new Stage(), "/views/chat.fxml",
                 "chatIT - Priv", "/img/icon.png", this, false);
->>>>>>> mvc-test
     }
 
     private void initializeComponents() {

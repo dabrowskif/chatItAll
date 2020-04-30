@@ -15,9 +15,9 @@ public class loginController  extends windowLoader {
     Button loginButton = new Button();
 
     private final Stage loginStage;
-    private final Integer port;
+    private final int port;
 
-    public loginController(Integer port) throws IOException {
+    public loginController(int port) throws IOException {
         this.port = port;
 
         createWindow(loginStage = new Stage(), "/views/login.fxml",
