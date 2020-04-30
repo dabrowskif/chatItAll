@@ -1,4 +1,4 @@
-package myclasses;
+package models;
 
 public class Friend {
     // test class before implementing database

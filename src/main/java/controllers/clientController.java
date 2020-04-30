@@ -6,28 +6,36 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+<<<<<<< HEAD
 import javafx.scene.control.ListCell;
+=======
+>>>>>>> mvc-test
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+<<<<<<< HEAD
 import myclasses.Friend;
+=======
+import models.chatModel;
+import models.Friend;
+import models.windowLoader;
+>>>>>>> mvc-test
 
 import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
 
-public class clientController {
+public class clientController  extends windowLoader {
     @FXML
-    private ListView<Friend> friendsListView ;
+    public ObservableList<Friend> friendsObservableList;
     @FXML
-    private ObservableList<Friend> friendsObservableList;
+    public ListView<Friend> friendsListView ;
     @FXML
     private ImageView userStatusImageView;
     @FXML
     private MenuItem logoutMenuItem;
     @FXML
+<<<<<<< HEAD
     private MenuItem exitApplicationMenuItem;
     @FXML
     private Label portLabel;
@@ -39,9 +47,24 @@ public class clientController {
     private List<Integer> chatWindowsToCloseList;
 
     public clientController(int port) throws IOException {
+=======
+    private MenuItem exitMenuItem;
+    @FXML
+    private Label portLabel; //test label
+
+    private final Integer port;
+    private final Stage clientStage;
+    private chatModel chatModel;
+
+
+
+    public clientController(Integer port) throws IOException {
+        initializeComponents();
+>>>>>>> mvc-test
         this.port = port;
         initializeComponents();
 
+<<<<<<< HEAD
         userWindowStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/client.fxml"));
         loader.setController(this);
@@ -50,42 +73,19 @@ public class clientController {
         userWindowStage.setResizable(false);
         userWindowStage.getIcons().add(new Image("/img/icon.png"));
         userWindowStage.setOnHiding( event -> closeAllChatWindows());
+=======
+        createWindow(clientStage = new Stage(), "/views/client.fxml",
+                "chatIT", "/img/icon.png", this, false);
+>>>>>>> mvc-test
     }
+
     private void initializeComponents() {
-        friendsListView = new ListView<>();
-        userStatusImageView = new ImageView();
-        logoutMenuItem = new MenuItem();
-        exitApplicationMenuItem = new MenuItem();
-        chatWindowsMap = new TreeMap<>();
-        chatWindowsToCloseList = new ArrayList<>();
         friendsObservableList = FXCollections.observableArrayList();
         portLabel = new Label();
     }
 
-    private void closeAllChatWindows() {
-        getOpenedChatWindows();
-        closeOpenedChatWindows();
-    }
-
-    private void getOpenedChatWindows() {
-        for(Entry<Integer, chatController> entry : chatWindowsMap.entrySet()) {
-            chatWindowsToCloseList.add(entry.getKey());
-        }
-    }
-
-    private void closeOpenedChatWindows() {
-        for(Integer i : chatWindowsToCloseList) {
-            chatWindowsMap.get(i).closeStage();
-            chatWindowsMap.remove(i);
-        }
-        chatWindowsToCloseList.clear();
-    }
-
-    public void showStage() {
-        userWindowStage.show();
-    }
-
     @FXML
+<<<<<<< HEAD
     private void initialize()
     {
         portLabel.setText(String.valueOf(port));
@@ -149,29 +149,39 @@ public class clientController {
                 setText(item.getImie() + " " + item.getNazwisko());
             }
         }
+=======
+    private void initialize() {
+        portLabel.setText(String.valueOf(port));
+        chatModel = new chatModel(this);
+
+        clientStage.setOnHiding( event ->
+                chatModel.closeAllChatWindows());
+
+        logoutMenuItem.setOnAction(event -> {
+                closeStage();
+                openLoginWindow();
+        });
+
+        exitMenuItem.setOnAction(event ->
+                closeStage());
+
+        //TODO make it double click
+        friendsListView.setOnMouseClicked(event ->
+                chatModel.openChatWindow(friendsListView.getSelectionModel().getSelectedItem()) );
+
+>>>>>>> mvc-test
     }
 
-    private static ImageView createStatusImage(Friend.UserStatusEnum status) {
-        ImageView statusImage = new ImageView();
-        switch(status) {
-            case ON:
-                statusImage.setImage(new Image("/img/online.png"));
-                break;
-            case OFF:
-            case INVIS:
-                statusImage.setImage(new Image("/img/offline.png"));
-                break;
-            case BRB:
-                statusImage.setImage(new Image("/img/brb.png"));
-                break;
-            default:
-                break;
+    private void openLoginWindow() {
+        try {
+            loginController loginController = new loginController(port);
+            loginController.showStage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        statusImage.setFitHeight(25);
-        statusImage.setFitWidth(25);
-        return statusImage;
     }
 
+<<<<<<< HEAD
     private void closeMainWindow(){
         userWindowStage.close();
     }
@@ -204,6 +214,14 @@ public class clientController {
 
     public void closeChatWindowForFriend(int userID) {
         chatWindowsMap.remove(userID);
+=======
+    private void closeStage(){
+        clientStage.close();
+    }
+
+    public void showStage() {
+        clientStage.show();
+>>>>>>> mvc-test
     }
 
 }
