@@ -6,24 +6,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import models.clientModel;
-import myclasses.Friend;
+import models.chatModel;
+import models.Friend;
+import models.windowLoader;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
 
-public class clientController {
-    @FXML
-    public ListView<Friend> friendsListView ;
+public class clientController  extends windowLoader {
     @FXML
     public ObservableList<Friend> friendsObservableList;
+    @FXML
+    public ListView<Friend> friendsListView ;
     @FXML
     private ImageView userStatusImageView;
     @FXML
@@ -33,42 +31,31 @@ public class clientController {
     @FXML
     private Label portLabel; //test label
 
-    private final int port;
+    private final Integer port;
     private final Stage clientStage;
-    private clientModel clientModel;
+    private chatModel chatModel;
 
 
 
-    public clientController(int port) throws IOException {
-        this.port = port;
+    public clientController(Integer port) throws IOException {
         initializeComponents();
+        this.port = port;
 
-        clientStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/client.fxml"));
-        loader.setController(this);
-        clientStage.setScene(new Scene(loader.load()));
-        clientStage.setTitle("chatIT");
-        clientStage.setResizable(false);
-        clientStage.getIcons().add(new Image("/img/icon.png"));
+        createWindow(clientStage = new Stage(), "/views/client.fxml",
+                "chatIT", "/img/icon.png", this, false);
     }
 
     private void initializeComponents() {
-        friendsListView = new ListView<>();
-        userStatusImageView = new ImageView();
-        logoutMenuItem = new MenuItem();
-        exitMenuItem = new MenuItem();
         friendsObservableList = FXCollections.observableArrayList();
-        portLabel = new Label();
     }
 
     @FXML
-    private void initialize()
-    {
+    private void initialize() {
         portLabel.setText(String.valueOf(port));
-        clientModel = new clientModel(this);
+        chatModel = new chatModel(this);
 
         clientStage.setOnHiding( event ->
-                clientModel.closeAllChatWindows());
+                chatModel.closeAllChatWindows());
 
         logoutMenuItem.setOnAction(event -> {
                 closeStage();
@@ -80,14 +67,9 @@ public class clientController {
 
         //TODO make it double click
         friendsListView.setOnMouseClicked(event ->
-                clientModel.openChatWindowWithAnotherUser(friendsListView.getSelectionModel().getSelectedItem()) );
+                chatModel.openChatWindow(friendsListView.getSelectionModel().getSelectedItem()) );
 
     }
-
-
-
-
-
 
     private void openLoginWindow() {
         try {

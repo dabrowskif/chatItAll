@@ -8,11 +8,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.windowLoader;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import javax.xml.soap.Text;
 import java.io.IOException;
 
-public class serverPropertiesController {
+public class serverPropertiesController extends windowLoader {
     @FXML
     Button startServerButton;
     @FXML
@@ -23,35 +26,26 @@ public class serverPropertiesController {
     TextField portTextField;
 
     private final Stage serverPropertiesStage;
-    private final mainController mainController;
-    private int port;
+    private MutableInt port;
+    private MutableBoolean isServerRunning;
 
 
-    public serverPropertiesController(mainController mainController) throws IOException {
-        this.mainController = mainController;
-
-        serverPropertiesStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/serverProperties.fxml"));
-        loader.setController(this);
-        serverPropertiesStage.setScene(new Scene(loader.load()));
-        serverPropertiesStage.setTitle("chatIT - Server Properties");
-        serverPropertiesStage.setResizable(false);
-        serverPropertiesStage.getIcons().add(new Image("/img/icon.png"));
+    public serverPropertiesController(MutableBoolean isServerRunning, MutableInt port) throws IOException {
+        this.isServerRunning = isServerRunning;
+        this.port = port;
+        //initializeComponents();
+        
+        createWindow(serverPropertiesStage = new Stage(), "/views/serverProperties.fxml",
+                "chatIT - Server Properties", "/img/icon.png", this, false);
     }
 
     private void initializeComponents() {
-        startServerButton = new Button();
-        defaultRadioButton = new RadioButton();
-        customRadioButton = new RadioButton();
-        portTextField = new TextField();
-        port = 50000;
     }
 
     @FXML
     private void initialize() {
         startServerButton.setOnAction(event -> {
             setPortValue();
-            sendPortValueToMainWindow();
             openServerWindow();
             closeStage();
         });
@@ -64,16 +58,12 @@ public class serverPropertiesController {
     }
 
     private void setPortValue() {
-        port = Integer.parseInt(portTextField.getText());
-    }
-
-    private void sendPortValueToMainWindow() {
-        mainController.setPort(this.port);
+        port.setValue(Integer.parseInt(portTextField.getText()));
     }
 
     private void openServerWindow() {
         try {
-            serverController serverController = new serverController(port);
+            serverController serverController = new serverController(isServerRunning, port);
             serverController.showStage();
         } catch (IOException e) {
             e.printStackTrace();

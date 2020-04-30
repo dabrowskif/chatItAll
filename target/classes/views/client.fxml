@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="98.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="475.0" minHeight="10.0" prefHeight="467.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <ListView fx:id="friendsListView" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" />
-      <MenuBar prefHeight="22.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="4">
-        <menus>
-          <Menu mnemonicParsing="false" text="Konto">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Zmień pseudonim" />
-                  <MenuItem mnemonicParsing="false" text="Zmień login" />
-                  <MenuItem mnemonicParsing="false" text="Zmień hasło" />
-                  <MenuItem mnemonicParsing="false" text="Zmień avatar" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ustawienia">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Zmień kolor" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Aplikacja">
-            <items>
-                    <MenuItem mnemonicParsing="false" text="O programie" />
-                    <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Wyloguj" />
-                    <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Wyjdź" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Label fx:id="portLabel" prefHeight="17.0" prefWidth="180.0" text="test port" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets right="10.0" />
-         </GridPane.margin>
-      </Label>
-      <ImageView fx:id="userStatusImage" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets left="5.0" />
-         </GridPane.margin>
-      </ImageView>
-   </children>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
+          prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="35.0" minWidth="35.0" prefWidth="35.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="98.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="22.0" minHeight="22.0" prefHeight="22.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="475.0" minHeight="10.0" prefHeight="467.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <ListView fx:id="friendsListView" focusTraversable="false" prefHeight="200.0" prefWidth="200.0"
+              GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2"/>
+    <MenuBar prefHeight="22.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.columnSpan="4">
+        <Menu mnemonicParsing="false" text="Konto">
+            <MenuItem mnemonicParsing="false" text="Zmień pseudonim"/>
+            <MenuItem mnemonicParsing="false" text="Zmień login"/>
+            <MenuItem mnemonicParsing="false" text="Zmień hasło"/>
+            <MenuItem mnemonicParsing="false" text="Zmień avatar"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Ustawienia">
+            <MenuItem mnemonicParsing="false" text="Zmień kolor"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Aplikacja">
+            <MenuItem mnemonicParsing="false" text="O programie"/>
+            <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Wyloguj"/>
+            <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="Wyjdź"/>
+        </Menu>
+    </MenuBar>
+    <Label fx:id="portLabel" prefHeight="17.0" prefWidth="180.0" text="test port" GridPane.columnIndex="2"
+           GridPane.columnSpan="2" GridPane.rowIndex="1">
+        <GridPane.margin>
+          <Insets right="10.0"/>
+        </GridPane.margin>
+    </Label>
+    <ImageView fx:id="userStatusImage" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true"
+               GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <GridPane.margin>
+          <Insets left="5.0"/>
+        </GridPane.margin>
+    </ImageView>
 </GridPane>

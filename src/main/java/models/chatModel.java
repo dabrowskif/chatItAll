@@ -6,30 +6,27 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import myclasses.Friend;
 
 import java.io.IOException;
 import java.util.*;
 
-public class clientModel {
+public class chatModel {
 
+    private clientController clientController;
     private Map<Integer, chatController> chatWindowsMap;
     private List<Integer> chatWindowsToCloseList;
-    private clientController clientController;
 
-    public clientModel(clientController clientController) {
+    public chatModel(clientController clientController) {
         this.clientController = clientController;
         initializeComponents();
 
         addFriendsToObservableList();
         setAndShowListView();
-
     }
 
     private void initializeComponents() {
         chatWindowsMap = new HashMap<>();
         chatWindowsToCloseList = new ArrayList<>();
-
     }
 
 
@@ -46,6 +43,23 @@ public class clientModel {
         clientController.friendsObservableList.add(new Friend(9, "Ryszard", "Ryszewski", Friend.UserStatusEnum.OFF));
         clientController.friendsObservableList.add(new Friend(10, "Mirosław", "Tegoroczny", Friend.UserStatusEnum.OFF));
         sortFriendsObservableList();
+    }
+
+    private void sortFriendsObservableList() {
+        FXCollections.sort(clientController.friendsObservableList, new StatusComparator());
+    }
+
+    static class StatusComparator implements Comparator<Friend> {
+        public int compare(Friend f1, Friend f2) {
+            return f1.getStatus().compareTo(f2.getStatus());
+        }
+    }
+
+
+    public void setAndShowListView() {
+        clientController.friendsListView.setItems(clientController.friendsObservableList);
+        clientController.friendsListView.setCellFactory(list -> new friendCell());
+
     }
 
     private static class friendCell extends ListCell<Friend> {
@@ -83,37 +97,24 @@ public class clientModel {
         return statusImage;
     }
 
-    private void sortFriendsObservableList() {
-        FXCollections.sort(clientController.friendsObservableList, new StatusComparator());
-    }
-
-    static class StatusComparator implements Comparator<Friend> {
-        public int compare(Friend f1, Friend f2) {
-            return f1.getStatus().compareTo(f2.getStatus());
-        }
-    }
-
-    public void setAndShowListView() {
-        clientController.friendsListView.setItems(clientController.friendsObservableList);
-        clientController.friendsListView.setCellFactory(list -> new friendCell());
-
-    }
-
-    public void openChatWindowWithAnotherUser(Friend friend) {
-        if(!checkIfChatWindowIsAlreadyOpenWithFriend(friend)) {
+    public void openChatWindow(Friend friend) {
+        if(!checkIfSpecificChatWindowIsAlreadyOpened(friend)) {
             try {
                 chatController chatController = new chatController(this, friend);
                 chatController.showStage();
                 chatWindowsMap.put(friend.getId(), chatController);
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
             }
         }
     }
 
-    private boolean checkIfChatWindowIsAlreadyOpenWithFriend(Friend friend) {
+    private boolean checkIfSpecificChatWindowIsAlreadyOpened(Friend friend) {
         return chatWindowsMap.containsKey(friend.getId());
+    }
+
+    public void closeChatWindow(int userID) {
+        chatWindowsMap.remove(userID);
     }
 
     public void closeAllChatWindows() {
@@ -135,8 +136,5 @@ public class clientModel {
         chatWindowsToCloseList.clear();
     }
 
-    public void closeChatWindowForFriend(int userID) {
-        chatWindowsMap.remove(userID);
-    }
 
 }

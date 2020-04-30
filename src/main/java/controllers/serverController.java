@@ -1,34 +1,42 @@
 package controllers;
 
+import connections.Server;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.windowLoader;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.io.IOException;
 
-public class serverController {
+public class serverController  extends windowLoader {
     private final Stage serverStage;
-    private int port;
+    private Server server;
 
-    public serverController(int port) throws IOException {
-        serverStage = new Stage();
+    private MutableBoolean isServerRunning;
+    private final MutableInt port;
+
+
+    public serverController(MutableBoolean isServerRunning, MutableInt port) throws IOException {
         this.port = port;
+        this.isServerRunning = isServerRunning;
+        initializeComponents();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/server.fxml"));
-        loader.setController(this);
-        serverStage.setScene(new Scene(loader.load()));
-        serverStage.setTitle("chatIT - Server");
-        serverStage.setResizable(false);
-        serverStage.getIcons().add(new Image("/img/icon.png"));
+        createWindow(serverStage = new Stage(), "/views/server.fxml",
+                "chatIT - server", "/img/icon.png", this, false);
     }
 
     private void initializeComponents() {
+        isServerRunning.setValue(true);
     }
 
     @FXML
     private void initialize() {
+
+        //serverStage.setOnHiding( event ->());
     }
 
     public void showStage() {

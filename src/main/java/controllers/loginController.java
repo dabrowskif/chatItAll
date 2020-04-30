@@ -6,26 +6,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import models.windowLoader;
 
 import java.io.IOException;
 
-public class loginController {
+public class loginController  extends windowLoader {
     @FXML
     Button loginButton = new Button();
 
     private final Stage loginStage;
-    private final int port;
+    private final Integer port;
 
-    public loginController(int port) throws IOException {
+    public loginController(Integer port) throws IOException {
         this.port = port;
 
-        loginStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
-        loader.setController(this);
-        loginStage.setScene(new Scene(loader.load()));
-        loginStage.setTitle("Login to chatIT");
-        loginStage.setResizable(false);
-        loginStage.getIcons().add(new Image("/img/icon.png"));
+        createWindow(loginStage = new Stage(), "/views/login.fxml",
+                "Login to chatIT", "/img/icon.png", this, false);
     }
 
     @FXML
