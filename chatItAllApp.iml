@@ -11,7 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.30.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.gwenn:sqlite-dialect:0.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.4.14.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.persistence:javax.persistence-api:2.2" level="project" />

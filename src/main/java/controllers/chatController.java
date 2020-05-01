@@ -57,11 +57,14 @@ public class chatController extends windowLoader {
                 }
             }
         });
+
         sendButton.setOnAction(event -> {
             sendMessage();
             clearTypingTextField();
         });
 
+        chatStage.setOnHiding(event ->
+                chatModel.closeChatWindow(friend.getId()));
     }
 
     private void sendMessage() {
@@ -71,8 +74,6 @@ public class chatController extends windowLoader {
     private void clearTypingTextField() {
         typingTextArea.setText("");
     }
-
-
 
     public void showStage() {
         chatStage.show();

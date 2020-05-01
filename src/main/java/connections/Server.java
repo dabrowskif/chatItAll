@@ -40,6 +40,8 @@ public class Server {
 
         public void run() {
             try {
+                in = new Scanner(socket.getInputStream());
+                out = new PrintWriter(socket.getOutputStream(), true);
 
             } catch (Exception e) {
                 System.out.println(e);
@@ -53,9 +55,15 @@ public class Server {
 
     }
 
-    private void recieveMessage(int senderID, int recieverID) {
+    private void manageMessage(int senderID, int recieverID) {
+        recieveMessage(senderID, recieverID);
         addMessageToDatabase();
+        sendMessage(senderID, recieverID);
     }
+
+    private void recieveMessage(int senderID, int recieverID) {
+    }
+
     private void addMessageToDatabase() {
 
     }
