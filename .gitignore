@@ -1,2 +1,6 @@
 /target/
 /src/test/
+**/*.localz
+**/*.local
+**/*.git
+**/*.DS_Store

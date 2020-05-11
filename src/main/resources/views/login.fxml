@@ -39,14 +39,14 @@
             <Insets left="25.0" />
          </padding>
       </Label>
-      <TextField maxWidth="100.0" minWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <PasswordField maxWidth="100.0" minWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <TextField fx:id="loginField" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <PasswordField fx:id="passwordField" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
       <ImageView fitHeight="100.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
          <image>
             <Image url="@../img/logo-client.png" />
          </image>
       </ImageView>
-      <Label text="Error label" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Label fx:id="errorLabel" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Zarejestruj" GridPane.columnIndex="3" GridPane.rowIndex="4" />
    </children>
 </GridPane>

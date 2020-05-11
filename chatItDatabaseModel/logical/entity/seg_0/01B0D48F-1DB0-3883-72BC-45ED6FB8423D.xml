@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="01B0D48F-1DB0-3883-72BC-45ED6FB8423D" name="friend_requests">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:58:43 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="sender_id" id="5E53FD4A-3D44-A6EC-F3F2-799773E241DE">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:58:50 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="reciever_id" id="19C4AEE6-8FEA-1961-9BCF-3F8ECE3FBA77">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:58:54 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="AF605B28-FECB-94D9-42F7-7A6CBF7CFD2D" name="friend_requests PK">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 19:01:06 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>5E53FD4A-3D44-A6EC-F3F2-799773E241DE</attributeRef>
+<attributeRef>19C4AEE6-8FEA-1961-9BCF-3F8ECE3FBA77</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

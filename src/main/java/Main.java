@@ -1,4 +1,5 @@
-import controllers.mainController;
+import connections.HibernateConnection;
+import controllers.MainController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -16,9 +17,13 @@ public class Main extends Application {
     }
 
     private void openMainWindow() throws IOException {
-        mainController mainController = new mainController();
+        MainController mainController = new MainController();
         mainController.showStage();
+
+        HibernateConnection hibernateConnection = HibernateConnection.getInstance();
+        hibernateConnection.addDatabaseData();
     }
+
 
 
 }

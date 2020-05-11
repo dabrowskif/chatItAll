@@ -11,13 +11,14 @@
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="connection.url">jdbc:sqlite:chatit.db</property>
-        <property name="connection.username"></property>
+        <property name="connection.Usersname"></property>
         <property name="connection.password"></property>
         <property name="hibernate.current_session_context_class">thread</property>
 
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <!--- create albo update -->
 
-        <mapping class="pojodb.User"/>
+        <mapping class="hibernate.entities.User"/>
 
     </session-factory>
 </hibernate-configuration>

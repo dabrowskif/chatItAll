@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DataTypesDesign class="oracle.dbtools.crest.model.design.datatypes.DataTypesDesign" name="DataTypes" id="AD3B3AAC-67EB-9467-1B72-23663827C180" mainViewID="7EC6C7A9-1648-30C5-B25C-F39CB76431AF">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:44:18 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<collectionOfRefsPrefix>array_ref_</collectionOfRefsPrefix>
+<collectionPrefix>array_</collectionPrefix>
+<defaultArrayLimit>10</defaultArrayLimit>
+<defaultCollectionType_Kind>ARRAY</defaultCollectionType_Kind>
+<defaultCollectionType_Suffix>_Array</defaultCollectionType_Suffix>
+<embeddedStructuredTypePrefix>inst_</embeddedStructuredTypePrefix>
+<referencePrefix>ref_</referencePrefix>
+<UserssoleInAssociationEndAsName>true</UserssoleInAssociationEndAsName>
+</DataTypesDesign>

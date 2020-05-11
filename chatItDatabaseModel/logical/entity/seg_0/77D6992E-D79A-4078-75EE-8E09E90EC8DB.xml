@@ -1,0 +1,140 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="77D6992E-D79A-4078-75EE-8E09E90EC8DB" name="read_message_status">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 19:04:06 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="group_id" id="83EAD05A-5366-D038-1C8B-420F2C1B7677">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 19:07:43 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="user_id" id="B9912B40-E519-CF71-11F3-3E2704065C45">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 19:07:48 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="is_read" id="23B03637-7183-5460-FECD-C395CC21E04F">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 19:14:39 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id" id="01B6C21F-2469-5308-E3FB-C531612FB42A">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:35 UTC</createdTime>
+<generatorID>75F810D9-46CF-AEDF-7709-E834BD044BD3</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>A3D83C7D-CCC3-9608-3710-3F12E9D954F6</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="group_id1" id="8FB1567E-750E-80DC-42EE-97FA9EABB5FF">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:35 UTC</createdTime>
+<generatorID>75F810D9-46CF-AEDF-7709-E834BD044BD3</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>9E7EB456-EBDF-7C1A-0DD6-23C43761E4E3</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Users_id" id="EF45EEB9-601D-E6CC-D1AB-A4485EC1DDA8">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:35 UTC</createdTime>
+<generatorID>75F810D9-46CF-AEDF-7709-E834BD044BD3</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>260D72E3-7166-8BD6-B98F-61AD498CBA07</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="E3885FDD-255A-E60C-56FB-FDD4B780FF0A">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:44 UTC</createdTime>
+<generatorID>E38590F8-246D-9572-0ED5-C5E9EE8B68C7</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>14C178A2-3533-F6E1-2799-C3168356ADF0</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="group_id2" id="C785E3A0-C225-F87E-E518-7633691951EC">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:44 UTC</createdTime>
+<generatorID>E38590F8-246D-9572-0ED5-C5E9EE8B68C7</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>E83503B8-3BED-0730-1285-5A07E2D924B0</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Users_id1" id="03E18FC4-4BBE-D7B6-E2AC-997FD3126D44">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:44 UTC</createdTime>
+<generatorID>E38590F8-246D-9572-0ED5-C5E9EE8B68C7</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>2699928E-AED3-F17E-EA93-67F52E5864D0</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="F8C7C4D9-BC3A-9958-AEB0-37100E990895" name="read_message_status PK">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:36:17 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>83EAD05A-5366-D038-1C8B-420F2C1B7677</attributeRef>
+<attributeRef>B9912B40-E519-CF71-11F3-3E2704065C45</attributeRef>
+<attributeRef>E3885FDD-255A-E60C-56FB-FDD4B780FF0A</attributeRef>
+<attributeRef>C785E3A0-C225-F87E-E518-7633691951EC</attributeRef>
+<attributeRef>03E18FC4-4BBE-D7B6-E2AC-997FD3126D44</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

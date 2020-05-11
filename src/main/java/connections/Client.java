@@ -31,7 +31,7 @@ public class Client {
         }
     }
 
-    private void sendMessageTo(int userId, String message) {
+    private void sendMessageTo(int UsersId, String message) {
 
     }
 

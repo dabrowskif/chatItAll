@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="49C299A0-0554-3411-2320-F71F822E588F" mainViewID="ADFC5CD7-67C1-EF13-05B1-75164A6E278C">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:44:18 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

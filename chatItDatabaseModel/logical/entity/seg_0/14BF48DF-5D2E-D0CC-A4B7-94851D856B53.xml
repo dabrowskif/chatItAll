@@ -1,0 +1,80 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="14BF48DF-5D2E-D0CC-A4B7-94851D856B53" name="group">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:52:16 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="14C178A2-3533-F6E1-2799-C3168356ADF0">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:52:56 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazwa" id="28FC9098-A6C2-4800-8187-152A8DFBAA67">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-01 18:53:04 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="group_id" id="E83503B8-3BED-0730-1285-5A07E2D924B0">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:02 UTC</createdTime>
+<generatorID>D78E76A3-B28A-1EFE-E97A-74BB4953E3DD</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>F7CBC1C7-7CD0-92B4-D62C-34F4CE981215</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="Users_id" id="2699928E-AED3-F17E-EA93-67F52E5864D0">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:41:02 UTC</createdTime>
+<generatorID>D78E76A3-B28A-1EFE-E97A-74BB4953E3DD</generatorID>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<referedAttribute>8F7A626A-951A-DB06-700D-03DF8FEC3BFA</referedAttribute>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="C3C7C3B6-3EC4-8BB9-2A95-5F86AE91D775" name="group PK">
+<createdBy>filip</createdBy>
+<createdTime>2020-05-02 09:36:04 UTC</createdTime>
+<ownerDesignName>chatItDatabaseModel</ownerDesignName>
+<engineerTo>
+<item key="7DB78338-D717-2D4E-1A22-C857D583A715" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>14C178A2-3533-F6E1-2799-C3168356ADF0</attributeRef>
+<attributeRef>E83503B8-3BED-0730-1285-5A07E2D924B0</attributeRef>
+<attributeRef>2699928E-AED3-F17E-EA93-67F52E5864D0</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
