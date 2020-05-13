@@ -24,17 +24,12 @@ public class MainController extends WindowLoader {
     public MutableInt port;
 
     public MainController() throws IOException {
-        initializeComponents();
+        isServerRunning = new MutableBoolean(false);
+        port = new MutableInt(50000);
 
         mainStage = new Stage();
         createWindow(mainStage, "/views/main.fxml", "chatIT",
                 "/img/icon.png", this, false);
-
-    }
-
-    private void initializeComponents() {
-        isServerRunning = new MutableBoolean(false);
-        port = new MutableInt(50000);
     }
 
     @FXML

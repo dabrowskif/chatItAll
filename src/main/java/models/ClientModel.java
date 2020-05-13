@@ -1,5 +1,6 @@
 package models;
 
+import connections.Client;
 import connections.HibernateConnection;
 import controllers.ChatController;
 import controllers.ClientController;
@@ -24,27 +25,30 @@ public class ClientModel {
     private List<Integer> chatWindowsToCloseList;
 
     private User user;
+    private Client client;
 
 
-    public ClientModel(ClientController clientController, User user) {
+    public ClientModel(ClientController clientController, User user) throws IOException {
         initializeComponents();
         this.clientController = clientController;
         this.user = user;
 
-        addUsersToObservableList();
+        refreshUsersObservableList();
         setAndShowUsersListView();
         setUserStatus(ON);
     }
 
-    private void initializeComponents() {
+    private void initializeComponents() throws IOException {
         hibernateConnection =  HibernateConnection.getInstance();
         openedChatWindowsMap = new HashMap<>();
         chatWindowsToCloseList = new ArrayList<>();
         user = new User();
+        client = new Client(clientController.port, user.getId());
     }
 
 
-    public void addUsersToObservableList() {
+    public void refreshUsersObservableList() {
+        clientController.usersObservableList.clear();
         ArrayList<User> friendList= new ArrayList<>(hibernateConnection.getUserFriends(user));
         clientController.usersObservableList.addAll(friendList);
 

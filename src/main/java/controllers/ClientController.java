@@ -30,14 +30,14 @@ public class ClientController extends WindowLoader {
     @FXML
     private Label portLabel; //test label
 
-    private final int port;
+    public final int port;
     private final Stage clientStage;
     private User user;
     private ClientModel clientModel;
 
 
     public ClientController(int port, User user) throws IOException {
-        initializeComponents();
+        usersObservableList = FXCollections.observableArrayList();
         this.port = port;
         this.user = user;
 
@@ -46,11 +46,10 @@ public class ClientController extends WindowLoader {
     }
 
     private void initializeComponents() {
-        usersObservableList = FXCollections.observableArrayList();
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
         portLabel.setText(String.valueOf(port));
         clientModel = new ClientModel(this, user);
 

@@ -1,77 +1,119 @@
 package connections;
 
-import com.sun.javafx.collections.MappingChange;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+import cconnections.ClientThread;
+import models.ServerModel;
+
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
-public class Server {
+public class Server implements Runnable{
 
-    private static Map<Integer, PrintWriter> clientsWriterMap = new HashMap<>();
+    private ServerSocket serverSocket;
+    private ArrayList<Socket> clientsList;
+    private ArrayList<ClientThread> clientsThreadsList;
+    private ServerModel serverModel;
 
-
-
-
-    public Server(int port) throws IOException {
-        System.out.print("Serwer zaczął działać");
-        ExecutorService clientPool = Executors.newFixedThreadPool(100);
-        ServerSocket listener = new ServerSocket(port);
-        while(true){
-            clientPool.execute(new ClientHandler(listener.accept()));
-        }
+    public Server(int port, ServerModel serverModel) throws IOException {
+        serverSocket = new ServerSocket(port);
+        this.serverModel = serverModel;
+        clientsList = new ArrayList<>();
+        clientsThreadsList = new ArrayList<ClientThread>();
     }
 
+    public void run() {
+        try {
+            while (true) {
 
-    private static class ClientHandler implements Runnable {
-        private String name;
-        private Socket socket;
-        private Scanner in;
-        private PrintWriter out;
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        serverModel.addCommunicateToServerLog("Serwer uruchomiony!");
+                        serverModel.addCommunicateToServerLog("Czekam na połączenia...");
+                    }
+                });
 
-        public ClientHandler(Socket socket) {
-            this.socket = socket;
-        }
+                final Socket clientSocket = serverSocket.accept();
+                clientsList.add(clientSocket);
 
-        public void run() {
-            try {
-                in = new Scanner(socket.getInputStream());
-                out = new PrintWriter(socket.getOutputStream(), true);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        serverModel.addCommunicateToServerLog("Client "
+                                + clientSocket.getRemoteSocketAddress()
+                                + " connected");
+                    }
+                });
 
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally {
+                ClientThread clientThreadHolderClass =
+                        new ClientThread(clientSocket, this);
+                Thread clientThread = new Thread(clientThreadHolderClass);
+                clientsThreadsList.add(clientThreadHolderClass);
+                clientThread.setDaemon(true);
+                clientThread.start();
+
+                serverModel.threadsList.add(clientThread);
 
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void addNewClientToMap() {
+
+
+    public void disconnectClient(ClientThread client) {
+
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                serverModel.addCommunicateToServerLog("Client "
+                        + client.getClientSocket().getRemoteSocketAddress()
+                        + " disconnected");
+                clientsList.remove(clientsThreadsList.indexOf(client));
+                clientsThreadsList.remove(clientsThreadsList.indexOf(client));
+            }
+        });
+
 
     }
 
-    private void manageMessage(int senderID, int recieverID) {
-        recieveMessage(senderID, recieverID);
-        addMessageToDatabase();
-        sendMessage(senderID, recieverID);
+    private void executeCommand(byte command) {
+        switch (command) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            default:
+                break;
+        }
     }
-
-    private void recieveMessage(int senderID, int recieverID) {
-    }
-
-    private void addMessageToDatabase() {
-
-    }
-
-    private void sendMessage(int senderID, int recieverID) {
-    }
-
-
 
 
 

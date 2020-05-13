@@ -1,39 +1,41 @@
 package connections;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
-    Scanner in;
-    PrintWriter out;
+    DataInputStream in;
+    DataOutputStream out;
     Socket socket;
     int port;
+    int userId;
 
 
-    public Client(int port) throws IOException {
+    public Client(int port, int userId) throws IOException {
         this.port = port;
+        this.userId = userId;
+
+        run();
     }
 
     private void run() throws IOException {
         try {
             socket = new Socket("127.0.0.1", port);
-            in = new Scanner(socket.getInputStream());
-            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new DataInputStream(socket.getInputStream());
+            out = new DataOutputStream(socket.getOutputStream());
 
-            while (true) {
-                String line = in.nextLine();
+            out.writeInt(userId);
+            out.flush();
 
-            }
+        } catch(Exception e) {
+            e.printStackTrace();
         } finally {
 
         }
     }
 
-    private void sendMessageTo(int UsersId, String message) {
 
-    }
 
 
 

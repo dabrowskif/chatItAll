@@ -1,5 +1,6 @@
 package controllers;
 
+import connections.Client;
 import hibernate.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,21 +28,19 @@ public class ChatController extends WindowLoader {
 
 
 
-    private User user;
-    private ClientModel clientModel;
     private Stage chatStage;
 
+    private User user;
+    private ClientModel clientModel;
+    private Client client;
+
     public ChatController(ClientModel clientModel, User user) throws IOException {
-        initializeComponents();
+        messagesObservableList = FXCollections.observableArrayList();
         this.user = user;
         this.clientModel = clientModel;
 
         createWindow(chatStage = new Stage(), "/views/chat.fxml",
                 "chatIT - Priv", "/img/icon.png", this, false);
-    }
-
-    private void initializeComponents() {
-        messagesObservableList = FXCollections.observableArrayList();
     }
 
     @FXML
