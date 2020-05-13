@@ -1,10 +1,9 @@
-package cconnections;
+package connections;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
-import connections.Server;
 import javafx.application.Platform;
 
 public class ClientThread implements Runnable {
@@ -13,15 +12,15 @@ public class ClientThread implements Runnable {
 
     private Socket clientSocket;
 
-    private DataInputStream in;
-    private DataOutputStream out;
+    private DataInputStream clientToServerReader;
+    private DataOutputStream serverToClientWriter;
 
     public ClientThread(Socket clientSocket, Server server) {
         this.setClientSocket(clientSocket);
         this.server = server;
         try {
-            in = new DataInputStream(clientSocket.getInputStream());
-            out = new DataOutputStream(clientSocket.getOutputStream());
+            clientToServerReader = new DataInputStream(clientSocket.getInputStream());
+            serverToClientWriter = new DataOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -29,14 +28,19 @@ public class ClientThread implements Runnable {
 
     public void run() {
         try {
-            String inputToServer;
+            int writerUserId;
+            int recieverUserId;
+            byte commandCode;
+            Platform.runLater(() -> System.out.println("Klient podłączony!"));
             while (true) {
-                // todo m
-
+                writerUserId = clientToServerReader.readInt();
+                recieverUserId = clientToServerReader.readInt();
+                commandCode = clientToServerReader.readByte();
+                executeCommand(commandCode);
+                System.out.println("Kod polecenia: " + writerUserId + " do " + recieverUserId + " polecenie " + commandCode);
             }
-        } catch (Exception e) {
-            server.disconnectClient(this);
-            e.printStackTrace();
+        } catch (IOException e) {
+            server.clientDisconnected(this);
         }
     }
 
@@ -50,5 +54,38 @@ public class ClientThread implements Runnable {
 
     public void setClientSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
+    }
+
+
+
+    private void executeCommand(byte command) {
+        switch (command) {
+            case 1:
+                System.out.println("KOMENDA 1");
+                break;
+            case 2:
+                System.out.println("KOMENDA 2");
+                break;
+            case 3:
+                System.out.println("KOMENDA 3");
+                break;
+            case 4:
+                System.out.println("KOMENDA 4");
+                break;
+            case 5:
+                System.out.println("KOMENDA 5");
+                break;
+            case 6:
+                System.out.println("KOMENDA 6");
+                break;
+            case 7:
+                System.out.println("KOMENDA 7");
+                break;
+            case 8:
+                System.out.println("KOMENDA 8");
+                break;
+            default:
+                break;
+        }
     }
 }

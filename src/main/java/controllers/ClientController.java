@@ -44,10 +44,6 @@ public class ClientController extends WindowLoader {
         createWindow(clientStage = new Stage(), "/views/client.fxml",
                 "chatIT", "/img/icon.png", this, false);
     }
-
-    private void initializeComponents() {
-    }
-
     @FXML
     private void initialize() throws IOException {
         portLabel.setText(String.valueOf(port));

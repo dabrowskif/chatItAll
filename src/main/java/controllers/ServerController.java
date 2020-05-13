@@ -1,6 +1,5 @@
 package controllers;
 
-import connections.Server;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,14 +31,13 @@ public class ServerController extends WindowLoader {
         isServerRunning.setValue(true);
         serverLogObservableList= FXCollections.observableArrayList();
         serverLogListView = new ListView<>();
-
+        serverModel = new ServerModel(this,this.port);
+        serverLogListView.setItems(serverLogObservableList);
         createWindow(serverStage = new Stage(), "/views/server.fxml", "chatIT - server", "/img/icon.png", this, false);
     }
 
     @FXML
-    private void initialize() throws IOException {
-        serverModel = new ServerModel(this,port);
-
+    private void initialize() {
         serverStage.setOnHiding( event ->
                 isServerRunning.setValue(false));
     }

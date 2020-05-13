@@ -22,28 +22,44 @@ public class ClientModel {
     private HibernateConnection hibernateConnection;
 
     private Map<Integer, ChatController> openedChatWindowsMap;
-    private List<Integer> chatWindowsToCloseList;
+    private ArrayList<Integer> chatWindowsToCloseList;
+    private ArrayList<Thread> threadsList;
 
     private User user;
     private Client client;
-
+    private final int port;
 
     public ClientModel(ClientController clientController, User user) throws IOException {
         initializeComponents();
+        this.port = clientController.port;
         this.clientController = clientController;
         this.user = user;
 
         refreshUsersObservableList();
         setAndShowUsersListView();
         setUserStatus(ON);
+        startClient();
+
+
+        //testing purposes
+        client.sendCommandToServer(1, (byte) 1);
+        client.sendCommandToServer(2, (byte) 2);
+        client.sendCommandToServer(3, (byte) 3);
     }
 
     private void initializeComponents() throws IOException {
         hibernateConnection =  HibernateConnection.getInstance();
         openedChatWindowsMap = new HashMap<>();
         chatWindowsToCloseList = new ArrayList<>();
+        threadsList = new ArrayList<>();
         user = new User();
-        client = new Client(clientController.port, user.getId());
+    }
+
+    private void startClient() throws IOException {
+        client = new Client(port, user.getId());
+        Thread clientThread = new Thread(client);
+        clientThread.start();
+        threadsList.add(clientThread);
     }
 
 

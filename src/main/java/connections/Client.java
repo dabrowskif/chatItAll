@@ -1,37 +1,58 @@
 package connections;
 
+import javafx.application.Platform;
+
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
+import java.net.SocketException;
 
-public class Client {
-    DataInputStream in;
-    DataOutputStream out;
+public class Client implements Runnable{
+    DataInputStream serverToClientReader;
+    DataOutputStream clientToServerWriter;
     Socket socket;
-    int port;
     int userId;
 
 
     public Client(int port, int userId) throws IOException {
-        this.port = port;
         this.userId = userId;
 
-        run();
+        socket = new Socket("127.0.0.1", port);
+        serverToClientReader = new DataInputStream(socket.getInputStream());
+        clientToServerWriter = new DataOutputStream(socket.getOutputStream());
     }
 
-    private void run() throws IOException {
-        try {
-            socket = new Socket("127.0.0.1", port);
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
+    public void sendCommandToServer(int recieverUserId, byte commandByte) throws IOException {
+        sendWriterUserId();
+        sendRecieverUserId(recieverUserId);
+        sendCommandCode(commandByte);
+    }
 
-            out.writeInt(userId);
-            out.flush();
+    private void sendWriterUserId() throws IOException {
+        clientToServerWriter.writeInt(userId);
+    }
 
-        } catch(Exception e) {
-            e.printStackTrace();
-        } finally {
+    private void sendRecieverUserId(int recieverUserId) throws IOException {
+        clientToServerWriter.writeInt(recieverUserId);
+    }
 
+    private void sendCommandCode(byte commandByte) throws IOException {
+        clientToServerWriter.writeByte(commandByte);
+    }
+
+
+    public void run() {
+        while (true) {
+            try {
+                String inputFromServer = serverToClientReader.readUTF();
+                Platform.runLater(() -> System.out.println(inputFromServer));
+            } catch (SocketException e) {
+                Platform.runLater(() ->
+                        System.out.println("Awaria serwera!")
+                );
+                break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -46,10 +46,6 @@ public class HibernateConnection {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
-            /*isCorrect = session.createQuery("from User u where u.login = :login and u.password = :password")
-                    .setParameter("login", login)
-                    .setParameter("password", password)
-                    .uniqueResult() != null;*/
             user = session.createQuery("select u from User u where u.login = :login and u.password = :password", User.class)
                     .setParameter("login", login)
                     .setParameter("password", password)
