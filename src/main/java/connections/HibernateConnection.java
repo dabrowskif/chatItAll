@@ -3,6 +3,7 @@ package connections;
 import hibernate.entities.Friend;
 import hibernate.entities.User;
 import hibernate.entities.UserInfo;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -61,11 +62,12 @@ public class HibernateConnection {
         return user;
     }
 
-    public void setUserStatus(User user, StatusEnum statusEnum) {
+    public void setUserStatus(int userId, StatusEnum statusEnum) {
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
+            User user = session.get(User.class, userId);
             user.setStatus(statusEnum);
 
             session.update(user);
@@ -78,13 +80,15 @@ public class HibernateConnection {
         }
     }
 
-    public List<User> getUserFriends(User user) {
+    public List<User> getUserFriends(int userId) {
         List<User> friendList = new ArrayList<>();
 
         try {
             session = sessionFactory.getCurrentSession();
             session.beginTransaction();
 
+            User user = session.get(User.class,userId);
+            Hibernate.initialize(user.getFriends());
             friendList = user.getFriends();
 
             session.getTransaction().commit();
@@ -94,6 +98,28 @@ public class HibernateConnection {
             session.close();
         }
         return friendList;
+    }
+
+    public void addUserFriend(int userId, int userToAddId) {
+        try {
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            User user = session.get(User.class, userId);
+            User userToAdd = session.get(User.class, userToAddId);
+
+            user.addFriend(userToAdd);
+            //user.addFriend(userToAdd);
+
+            session.update(user);
+            //session.update(userToAdd);
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public void addDatabaseData() {
@@ -113,6 +139,7 @@ public class HibernateConnection {
             session.save(tmpUser2);
             session.save(tmpUser3);
             session.save(tmpUser4);
+
 
             session.getTransaction().commit();
 

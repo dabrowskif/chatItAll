@@ -2,15 +2,12 @@ package connections;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
-
-import javafx.application.Platform;
 
 public class ClientThread implements Runnable {
 
     private final Server server;
-
     private Socket clientSocket;
+    private int userId;
 
     private DataInputStream clientToServerReader;
     private DataOutputStream serverToClientWriter;
@@ -18,6 +15,7 @@ public class ClientThread implements Runnable {
     public ClientThread(Socket clientSocket, Server server) {
         this.setClientSocket(clientSocket);
         this.server = server;
+
         try {
             clientToServerReader = new DataInputStream(clientSocket.getInputStream());
             serverToClientWriter = new DataOutputStream(clientSocket.getOutputStream());
@@ -31,7 +29,7 @@ public class ClientThread implements Runnable {
             int writerUserId;
             int recieverUserId;
             byte commandCode;
-            Platform.runLater(() -> System.out.println("Klient podłączony!"));
+
             while (true) {
                 writerUserId = clientToServerReader.readInt();
                 recieverUserId = clientToServerReader.readInt();
@@ -40,13 +38,27 @@ public class ClientThread implements Runnable {
                 System.out.println("Kod polecenia: " + writerUserId + " do " + recieverUserId + " polecenie " + commandCode);
             }
         } catch (IOException e) {
-            server.clientDisconnected(this);
+            //TODO make catch or finally work instead of calling method in ClientModel (disconnectFromServer();)
+            //server.clientDisconnected(this);
+        } finally {
+            //server.clientDisconnected(this);
         }
     }
 
-    /*public void writeToServer(String input) {
-        out.writeByte(1);
-    }*/
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getConnectedUserId() throws IOException {
+        int userId;
+        userId = clientToServerReader.readInt();
+        setUserId(userId);
+        return userId;
+    }
 
     public Socket getClientSocket() {
         return clientSocket;
@@ -56,10 +68,12 @@ public class ClientThread implements Runnable {
         this.clientSocket = clientSocket;
     }
 
-
-
     private void executeCommand(byte command) {
         switch (command) {
+            case 0:
+                System.out.println("KOMENDA 0");
+                server.clientDisconnected(this);
+                break;
             case 1:
                 System.out.println("KOMENDA 1");
                 break;

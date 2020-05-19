@@ -23,51 +23,44 @@ public class ClientModel {
 
     private Map<Integer, ChatController> openedChatWindowsMap;
     private ArrayList<Integer> chatWindowsToCloseList;
-    private ArrayList<Thread> threadsList;
+    //private ArrayList<Thread> threadsList;
 
-    private User user;
+    private final int userId;
     private Client client;
     private final int port;
 
-    public ClientModel(ClientController clientController, User user) throws IOException {
+    public ClientModel(ClientController clientController, int userId) throws IOException {
         initializeComponents();
         this.port = clientController.port;
         this.clientController = clientController;
-        this.user = user;
+        this.userId = userId;
 
-        refreshUsersObservableList();
-        setAndShowUsersListView();
+        refreshFriendsList();
         setUserStatus(ON);
         startClient();
-
-
-        //testing purposes
-        client.sendCommandToServer(1, (byte) 1);
-        client.sendCommandToServer(2, (byte) 2);
-        client.sendCommandToServer(3, (byte) 3);
     }
 
-    private void initializeComponents() throws IOException {
+    private void initializeComponents() {
         hibernateConnection =  HibernateConnection.getInstance();
         openedChatWindowsMap = new HashMap<>();
         chatWindowsToCloseList = new ArrayList<>();
-        threadsList = new ArrayList<>();
-        user = new User();
     }
 
     private void startClient() throws IOException {
-        client = new Client(port, user.getId());
+        client = new Client(port, userId);
         Thread clientThread = new Thread(client);
         clientThread.start();
-        threadsList.add(clientThread);
     }
 
+    public void refreshFriendsList() {
+        refreshUsersObservableList();
+        refreshUsersListView();
+    }
 
-    public void refreshUsersObservableList() {
+    private void refreshUsersObservableList() {
         clientController.usersObservableList.clear();
-        ArrayList<User> friendList= new ArrayList<>(hibernateConnection.getUserFriends(user));
+        ArrayList<User> friendList= new ArrayList<>(hibernateConnection.getUserFriends(userId));
         clientController.usersObservableList.addAll(friendList);
-
         sortUsersObservableList();
     }
 
@@ -82,7 +75,7 @@ public class ClientModel {
     }
 
 
-    public void setAndShowUsersListView() {
+    private void refreshUsersListView() {
         clientController.usersListView.setItems(clientController.usersObservableList);
         clientController.usersListView.setCellFactory(list -> new UserCell());
 
@@ -124,7 +117,7 @@ public class ClientModel {
     }
 
     public void setUserStatus(StatusEnum statusEnum) {
-        hibernateConnection.setUserStatus(user,statusEnum);
+        hibernateConnection.setUserStatus(userId,statusEnum);
     }
 
     public void openChatWindow(User user) {
@@ -165,6 +158,36 @@ public class ClientModel {
         }
         chatWindowsToCloseList.clear();
     }
+
+
+
+    public void disconnectFromServer() throws IOException {
+        client.sendCommandToServer(0,(byte) 0);
+    }
+
+
+    public void sendMessage() {
+
+    }
+
+    public void sendGroupMessage() {
+        //TODO
+    }
+
+    public void sendFriendRequest() {
+
+    }
+
+    public void acceptFriendRequest() {
+
+    }
+
+    public void testAddFriend() {
+        System.out.println("Przed dodaniem:" + hibernateConnection.getUserFriends(userId));
+        hibernateConnection.addUserFriend(userId, 4);
+        System.out.println("Po dodaniu:" + hibernateConnection.getUserFriends(userId));
+    }
+
 
 
 }

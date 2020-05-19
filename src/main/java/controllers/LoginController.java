@@ -56,7 +56,7 @@ public class LoginController extends WindowLoader {
     public void openClientWindowAndCloseLoginWindow(){
         try {
             loginStage.close();
-            ClientController clientController = new ClientController(port, user);
+            ClientController clientController = new ClientController(port, user.getId());
             clientController.showStage();
         } catch (IOException e) {
             e.printStackTrace();

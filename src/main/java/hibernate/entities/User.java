@@ -34,13 +34,14 @@ public class User {
     private UserInfo usersInfoId;
 
     @ManyToMany(
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "friend",
             joinColumns = @JoinColumn(name = "user1_id"),
             inverseJoinColumns = @JoinColumn(name = "user2_id"))
     private List<User> friends = new ArrayList<>();
+
 
 
     public User() {
@@ -106,17 +107,17 @@ public class User {
         return friends;
     }
 
-    public void setFriends(List<User> friends) {
+    public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
     }
 
-    public void addFriend(User theUser) {
+    public void addFriend(User userToAdd) {
         if(friends == null) {
             friends = new ArrayList<>();
         }
 
-        friends.add(theUser);
-        theUser.friends.add(this);
+        friends.add(userToAdd);
+        userToAdd.friends.add(this);
     }
 
     @Override

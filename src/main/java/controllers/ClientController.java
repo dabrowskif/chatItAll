@@ -1,9 +1,11 @@
 package controllers;
 
+import connections.HibernateConnection;
 import hibernate.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -29,17 +31,19 @@ public class ClientController extends WindowLoader {
     private MenuItem exitMenuItem;
     @FXML
     private Label portLabel; //test label
+    @FXML
+    private Button testButton;
 
     public final int port;
     private final Stage clientStage;
-    private User user;
+    private int userId;
     private ClientModel clientModel;
 
 
-    public ClientController(int port, User user) throws IOException {
-        usersObservableList = FXCollections.observableArrayList();
+    public ClientController(int port, int userId) throws IOException {
         this.port = port;
-        this.user = user;
+        this.userId = userId;
+        usersObservableList = FXCollections.observableArrayList();
 
         createWindow(clientStage = new Stage(), "/views/client.fxml",
                 "chatIT", "/img/icon.png", this, false);
@@ -47,11 +51,22 @@ public class ClientController extends WindowLoader {
     @FXML
     private void initialize() throws IOException {
         portLabel.setText(String.valueOf(port));
-        clientModel = new ClientModel(this, user);
+        clientModel = new ClientModel(this, userId);
+
+        testButton.setOnAction(event -> {
+            clientModel.testAddFriend();
+            clientModel.refreshFriendsList();
+        });
+
 
         clientStage.setOnHiding( event -> {
             clientModel.closeAllChatWindows();
             clientModel.setUserStatus(OFF);
+            try {
+                clientModel.disconnectFromServer();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         logoutMenuItem.setOnAction(event -> {

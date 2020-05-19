@@ -21,29 +21,8 @@ public class ConnectionTest {
         Session session = factory.getCurrentSession();
 
         try {
-
-
-            User tmpUser1 = new User("fufu", "fufupass", 123456, OFF);
-            User tmpUser2 = new User("maro", "maropass", 123457, OFF);
-            User tmpUser3 = new User("jaro", "jaropass", 123458, OFF);
-            User tmpUser4 = new User("karo", "karopass", 123459, OFF);
-
-
-            tmpUser1.addFriend(tmpUser2);
-            tmpUser1.addFriend(tmpUser3);
-            tmpUser1.addFriend(tmpUser4);
-
-            tmpUser2.addFriend(tmpUser3);
-            tmpUser2.addFriend(tmpUser4);
-
-
             session.beginTransaction();
 
-
-            session.save(tmpUser1);
-            session.save(tmpUser2);
-            session.save(tmpUser3);
-            session.save(tmpUser4);
 
 
 
@@ -80,8 +59,8 @@ public class ConnectionTest {
             //list users
             session = factory.getCurrentSession();
             session.beginTransaction();
-            List Userss = session.createQuery("from Users").getResultList();
-            displayUserss(Userss);
+            List users = session.createQuery("from Users").getResultList();
+            displayUsers(users);
             session.getTransaction().commit();
 
             //update "downloaded" user
@@ -90,16 +69,16 @@ public class ConnectionTest {
             int UsersId = 1;
             Users Users = session.get(hibernate.entities.Users.class, UsersId);
             Users.setLogin("MAKABRA");
-            Userss = session.createQuery("from Users").getResultList();
-            displayUserss(Userss);
+            User = session.createQuery("from Users").getResultList();
+            displayUsers(user);
             session.getTransaction().commit();
 
             //update users with query
             session = factory.getCurrentSession();
             session.beginTransaction();
             session.createQuery("update Users set password='changedpassword'").executeUpdate();
-            Userss = session.createQuery("from Users").getResultList();
-            displayUserss(Userss);
+            user = session.createQuery("from Users").getResultList();
+            displayUser(user);
             session.getTransaction().commit();
             //delete student
             session = factory.getCurrentSession();
